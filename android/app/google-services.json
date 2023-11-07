@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "728265546246",
+    "project_id": "tupension-e8dae",
+    "storage_bucket": "tupension-e8dae.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:728265546246:android:c9a292e47220cd3ac4c187",
+        "android_client_info": {
+          "package_name": "com.example.tu_pension"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5TJOwiPLDO3kcBSZKvWQLsKAEe0QRn6g"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
