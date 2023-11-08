@@ -3,7 +3,6 @@ import 'package:tu_pension/data/model/Product.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/components/product_card.dart';
 
-
 import 'section_title.dart';
 
 class PopularProducts extends StatelessWidget {
@@ -14,7 +13,7 @@ class PopularProducts extends StatelessWidget {
         Padding(
           padding:
               EdgeInsets.symmetric(horizontal: getProportionateScreenWidth(20)),
-          child: SectionTitle(title: "Popular Products", press: () {}),
+          child: SectionTitle(title: "Populares", press: () {}),
         ),
         SizedBox(height: getProportionateScreenWidth(20)),
         SingleChildScrollView(

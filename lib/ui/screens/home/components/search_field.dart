@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/size_config.dart';
 
-
-
 class SearchField extends StatelessWidget {
   const SearchField({
     Key? key,
@@ -26,7 +24,7 @@ class SearchField extends StatelessWidget {
             border: InputBorder.none,
             focusedBorder: InputBorder.none,
             enabledBorder: InputBorder.none,
-            hintText: "Search product",
+            hintText: "Buscar pensión",
             prefixIcon: Icon(Icons.search)),
       ),
     );

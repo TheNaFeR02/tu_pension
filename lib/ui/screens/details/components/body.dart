@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/data/model/Product.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/components/default_button.dart';
@@ -30,7 +31,28 @@ class Body extends StatelessWidget {
                 color: Color(0xFFF6F7F9),
                 child: Column(
                   children: [
-                    ColorDots(product: product),
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: SizeConfig.screenWidth * 0.15,
+                        right: SizeConfig.screenWidth * 0.15,
+                        bottom: getProportionateScreenWidth(15),
+                        top: getProportionateScreenWidth(15),
+                      ),
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/chat');
+                        },
+                        child: Text(
+                          "Ver comentarios",
+                          style: TextStyle(
+                            fontSize: getProportionateScreenWidth(15),
+                            color: kPrimaryColor,
+                          ),
+                        ),
+                      ),
+                    ),
+                    // ColorDots(product: product),
+
                     TopRoundedContainer(
                       color: Colors.white,
                       child: Padding(
@@ -41,7 +63,7 @@ class Body extends StatelessWidget {
                           top: getProportionateScreenWidth(15),
                         ),
                         child: DefaultButton(
-                          text: "Add To Cart",
+                          text: "Contactar al anunciante",
                           press: () {},
                         ),
                       ),
