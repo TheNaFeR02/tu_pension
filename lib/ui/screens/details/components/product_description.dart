@@ -4,8 +4,6 @@ import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/data/model/Product.dart';
 import 'package:tu_pension/size_config.dart';
 
-
-
 class ProductDescription extends StatelessWidget {
   const ProductDescription({
     Key? key,
@@ -70,7 +68,7 @@ class ProductDescription extends StatelessWidget {
             child: Row(
               children: [
                 Text(
-                  "See More Detail",
+                  "Ver más detalles",
                   style: TextStyle(
                       fontWeight: FontWeight.w600, color: kPrimaryColor),
                 ),

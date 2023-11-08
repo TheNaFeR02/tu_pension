@@ -5,8 +5,6 @@ import 'package:tu_pension/data/model/Product.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/screens/details/details_screen.dart';
 
-
-
 class ProductCard extends StatelessWidget {
   const ProductCard({
     Key? key,
@@ -36,7 +34,7 @@ class ProductCard extends StatelessWidget {
               AspectRatio(
                 aspectRatio: 1.02,
                 child: Container(
-                  padding: EdgeInsets.all(getProportionateScreenWidth(20)),
+                  padding: EdgeInsets.all(getProportionateScreenWidth(10)),
                   decoration: BoxDecoration(
                     color: kSecondaryColor.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(15),

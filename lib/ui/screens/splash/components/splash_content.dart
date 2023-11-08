@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/size_config.dart';
 
-
 class SplashContent extends StatelessWidget {
   const SplashContent({
     Key? key,
@@ -17,7 +16,7 @@ class SplashContent extends StatelessWidget {
       children: <Widget>[
         Spacer(),
         Text(
-          "TOKOTO",
+          "TuPension",
           style: TextStyle(
             fontSize: getProportionateScreenWidth(36),
             color: kPrimaryColor,

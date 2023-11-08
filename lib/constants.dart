@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tu_pension/size_config.dart';
 
-const kPrimaryColor = Color(0xFFFF7643);
-const kPrimaryLightColor = Color(0xFFFFECDF);
+const kPrimaryColor = Color(0xFF4CAF50);
+const kPrimaryLightColor = Color(0xFF8BC34A);
 const kPrimaryGradientColor = LinearGradient(
   begin: Alignment.topLeft,
   end: Alignment.bottomRight,
-  colors: [Color(0xFFFFA53E), Color(0xFFFF7643)],
+  colors: [Color(0xFF8BC34A), Color(0xFF4CAF50)],
 );
-const kSecondaryColor = Color(0xFF979797);
-const kTextColor = Color(0xFF757575);
+const kSecondaryColor = Color(0xFF2196F3);
+const kTextColor = Color.fromARGB(255, 83, 83, 83);
 
 const kAnimationDuration = Duration(milliseconds: 200);
 

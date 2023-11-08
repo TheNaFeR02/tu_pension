@@ -7,11 +7,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/controllers/user_controller.dart';
 
-
 import 'package:tu_pension/routes.dart';
 import 'package:tu_pension/theme.dart';
 import 'package:tu_pension/ui/screens/splash/splash_screen.dart';
-
 
 void main() {
   // Get.put(AuthenticationController());

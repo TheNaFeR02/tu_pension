@@ -3,7 +3,6 @@ import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/screens/sign_up/sign_up_screen.dart';
 
-
 class NoAccountText extends StatelessWidget {
   const NoAccountText({
     Key? key,
@@ -15,13 +14,13 @@ class NoAccountText extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Text(
-          "Don’t have an account? ",
+          "¿No tienes una cuenta?",
           style: TextStyle(fontSize: getProportionateScreenWidth(16)),
         ),
         GestureDetector(
           onTap: () => Navigator.pushNamed(context, SignUpScreen.routeName),
           child: Text(
-            "Sign Up",
+            " Regístrate",
             style: TextStyle(
                 fontSize: getProportionateScreenWidth(16),
                 color: kPrimaryColor),
