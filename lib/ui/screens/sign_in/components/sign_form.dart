@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:loggy/loggy.dart';
 // import 'package:shop_app/components/custom_surfix_icon.dart';
 
 // import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
@@ -8,6 +10,7 @@ import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/components/custom_surfix_icon.dart';
 import 'package:tu_pension/ui/components/default_button.dart';
 import 'package:tu_pension/ui/components/form_error.dart';
+import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/helper/keyboard.dart';
 import 'package:tu_pension/ui/screens/login_success/login_success_screen.dart';
 
@@ -22,6 +25,25 @@ class _SignFormState extends State<SignForm> {
   String? password;
   bool? remember = false;
   final List<String?> errors = [];
+  AuthenticationController authenticationController = Get.find();
+  bool signInSuccess = false;
+
+  _login(theEmail, thePassword) async {
+    logInfo('_login $theEmail $thePassword');
+    try {
+      // Here we call the login method from the AuthenticationController
+      await authenticationController.login(theEmail, thePassword);
+      signInSuccess = true;
+    } catch (err) {
+      signInSuccess = false;
+      Get.snackbar(
+        "Login",
+        err.toString(),
+        icon: const Icon(Icons.person, color: Colors.red),
+        snackPosition: SnackPosition.BOTTOM,
+      );
+    }
+  }
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -79,7 +101,10 @@ class _SignFormState extends State<SignForm> {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                _login(email, password);
+                if (signInSuccess) {
+                  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                }
               }
             },
           ),

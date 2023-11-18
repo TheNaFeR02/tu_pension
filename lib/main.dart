@@ -66,6 +66,8 @@ class _MyHomePageState extends State<MyHomePage> {
             // return const Scaffold(
             //   body: Central(),
             // );
+
+            Get.put(AuthenticationController());
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'The Flutter Way - Template',
