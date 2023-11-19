@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -9,6 +10,9 @@ import 'package:tu_pension/ui/components/default_button.dart';
 import 'package:tu_pension/ui/components/form_error.dart';
 import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/screens/complete_profile/complete_profile_screen.dart';
+import 'package:tu_pension/ui/screens/error/error_screen.dart';
+import 'package:tu_pension/ui/screens/register_success/register_success_screen.dart';
+import 'package:tu_pension/ui/screens/sign_in/sign_in_screen.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -29,22 +33,9 @@ class _SignUpFormState extends State<SignUpForm> {
     try {
       print('Sign Up $email, $password');
       await authenticationController.signup(email, password);
-      signUpSuccess = true;
-      // Get.snackbar(
-      //   "Sign Up",
-      //   'OK',
-      //   icon: const Icon(Icons.person, color: Colors.red),
-      //   snackPosition: SnackPosition.BOTTOM,
-      // );
     } catch (err) {
       logError('SignUp error $err');
       signUpSuccess = false;
-      // Get.snackbar(
-      //   "Sign Up",
-      //   err.toString(),
-      //   icon: const Icon(Icons.person, color: Colors.red),
-      //   snackPosition: SnackPosition.BOTTOM,
-      // );
     }
   }
 
@@ -77,14 +68,27 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
-                _signup(email, password);
-                if (signUpSuccess) {
-                  Navigator.pushNamed(context, CompleteProfileScreen.routeName);
-                }
+
+                await _signup(email, password);
+                FirebaseAuth.instance.authStateChanges().listen((User? user) {
+                  if (user == null) {
+                    print('There was an error creating a new account');
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ErrorScreen()));
+                  } else {
+                    print('User created a new account successfully');
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => RegisterSuccessScreen()));
+                  }
+                });
               }
             },
           ),
