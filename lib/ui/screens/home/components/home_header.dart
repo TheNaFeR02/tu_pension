@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:tu_pension/size_config.dart';
-import 'package:tu_pension/ui/screens/cart/cart_screen.dart';
+import 'package:tu_pension/ui/screens/favorite/favorite_screen.dart';
 import 'icon_btn_with_counter.dart';
 import 'search_field.dart';
 
@@ -20,9 +20,9 @@ class HomeHeader extends StatelessWidget {
         children: [
           SearchField(),
           // IconBtnWithCounter(
-          //   svgSrc: "assets/icons/Cart Icon.svg",
+          //   svgSrc: "assets/icons/Favorite Icon.svg",
 
-          //   press: () => Navigator.pushNamed(context, CartScreen.routeName),
+          //   press: () => Navigator.pushNamed(context, FavoriteScreen.routeName),
           // ),
           IconBtnWithCounter(
             svgSrc: "assets/icons/Bell.svg",
