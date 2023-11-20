@@ -38,13 +38,15 @@ class Body extends StatelessWidget {
             press: () {},
           ),
           ProfileMenu(
-            text: "Cerrar sesión",
-            icon: "assets/icons/Log out.svg",
-            press: () {
-              authenticationController.logout();
-              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => SignInScreen()));
-            },
-          ),
+              text: "Cerrar sesión",
+              icon: "assets/icons/Log out.svg",
+              press: () {
+                authenticationController.logout();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                    (route) => false);
+              }),
         ],
       ),
     );

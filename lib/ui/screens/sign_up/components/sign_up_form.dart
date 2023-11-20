@@ -33,9 +33,15 @@ class _SignUpFormState extends State<SignUpForm> {
     try {
       print('Sign Up $email, $password');
       await authenticationController.signup(email, password);
+      print('User created a new account successfully');
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => RegisterSuccessScreen()));
     } catch (err) {
       logError('SignUp error $err');
       signUpSuccess = false;
+      print('There was an error creating a new account');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => SignInScreen()));
     }
   }
 
@@ -71,24 +77,8 @@ class _SignUpFormState extends State<SignUpForm> {
             press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
-
+                // if valid goes to Register Success, If not goes to Sign In 
                 await _signup(email, password);
-                FirebaseAuth.instance.authStateChanges().listen((User? user) {
-                  if (user == null) {
-                    print('There was an error creating a new account');
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ErrorScreen()));
-                  } else {
-                    print('User created a new account successfully');
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RegisterSuccessScreen()));
-                  }
-                });
               }
             },
           ),

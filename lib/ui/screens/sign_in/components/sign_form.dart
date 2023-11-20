@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
@@ -12,6 +13,7 @@ import 'package:tu_pension/ui/components/default_button.dart';
 import 'package:tu_pension/ui/components/form_error.dart';
 import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/helper/keyboard.dart';
+import 'package:tu_pension/ui/screens/error/error_screen.dart';
 import 'package:tu_pension/ui/screens/login_success/login_success_screen.dart';
 
 class SignForm extends StatefulWidget {
@@ -26,22 +28,21 @@ class _SignFormState extends State<SignForm> {
   bool? remember = false;
   final List<String?> errors = [];
   AuthenticationController authenticationController = Get.find();
-  bool signInSuccess = false;
 
   _login(theEmail, thePassword) async {
     logInfo('_login $theEmail $thePassword');
     try {
       // Here we call the login method from the AuthenticationController
       await authenticationController.login(theEmail, thePassword);
-      signInSuccess = true;
+      print('User logged in successfully');
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => LoginSuccessScreen()));
     } catch (err) {
-      signInSuccess = false;
-      Get.snackbar(
-        "Login",
-        err.toString(),
-        icon: const Icon(Icons.person, color: Colors.red),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      print('There was an error logging in!!!!!!');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => ErrorScreen()));
+
+      logError('Login error $err');
     }
   }
 
@@ -96,15 +97,12 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Continuar",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-                _login(email, password);
-                if (signInSuccess) {
-                  Navigator.pushNamed(context, LoginSuccessScreen.routeName);
-                }
+                await _login(email, password);
               }
             },
           ),
