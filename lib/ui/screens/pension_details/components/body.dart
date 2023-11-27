@@ -89,17 +89,19 @@ class Body extends StatelessWidget {
     String userUid = FirebaseAuth.instance.currentUser!.uid;
     String sellerUid = pension.sellerUid;
     String chatId = 'chat_${userUid}_${sellerUid}';
-
+    print('pension: $pension');
+    print('userUid: $userUid');
+    print('sellerUid: $sellerUid');
     bool chatExists = await _checkIfChatExists(chatId);
 
     if (!chatExists) {
       await FirebaseFirestore.instance.collection('chats').doc(chatId).set({
         'participants': [userUid, sellerUid],
         'productTitle': pension.title,
-        'unreadMessages': {
-          userUid: 0,
-          sellerUid: 0,
-        },
+        // 'unreadMessages': {
+        //   userUid: 0,
+        //   sellerUid: 0,
+        // },
       });
     }
 

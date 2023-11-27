@@ -27,7 +27,7 @@ class Pension {
         price = json['price'] ?? 0,
         images = List<String>.from(json['images'] ?? []),
         rating = json['rating'] ?? '0.0',
-        sellerUid = json['sellerUid'] ?? "";
+        sellerUid = json['uid'] ?? "";
 
   toJson() {
     return {
@@ -35,6 +35,8 @@ class Pension {
       "description": description,
       "price": price,
       "images": images,
+      // "rating": rating,
+      "sellerUid": sellerUid,
     };
   }
 
