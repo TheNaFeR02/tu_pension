@@ -31,7 +31,7 @@ class _PensionImagesState extends State<PensionImages> {
               tag: widget.pension.key.toString(),
               child: 
               !widget.pension.images[selectedImage].contains('add-image.png')
-                    ? (Image.file(File(widget.pension.images[selectedImage])))
+                    ? (Image.network(widget.pension.images[selectedImage]))
                     : (Image.asset(widget.pension.images[selectedImage])),
             ),
           ),
@@ -68,8 +68,8 @@ class _PensionImagesState extends State<PensionImages> {
               color: kPrimaryColor.withOpacity(selectedImage == index ? 1 : 0)),
         ),
         child: !widget.pension.images[selectedImage].contains('add-image.png')
-                    ? (Image.file(File(widget.pension.images[selectedImage])))
-                    : (Image.asset(widget.pension.images[selectedImage])),
+                    ? (Image.network(widget.pension.images[index]))
+                    : (Image.asset(widget.pension.images[index])),
       ),
     );
   }
