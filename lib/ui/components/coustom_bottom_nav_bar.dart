@@ -5,6 +5,9 @@ import 'package:tu_pension/enums.dart';
 import 'package:tu_pension/ui/screens/favorite/favorite_screen.dart';
 import 'package:tu_pension/ui/screens/home/home_screen.dart';
 import 'package:tu_pension/ui/screens/profile/profile_screen.dart';
+import 'package:tu_pension/ui/screens/chat/chat_list_screen.dart';
+import 'package:tu_pension/hooks/hasPendingNotifications.dart';
+import 'package:badges/badges.dart' as badges;
 
 class CustomBottomNavBar extends StatelessWidget {
   const CustomBottomNavBar({
@@ -54,8 +57,31 @@ class CustomBottomNavBar extends StatelessWidget {
                     Navigator.pushNamed(context, FavoriteScreen.routeName),
               ),
               IconButton(
-                icon: SvgPicture.asset("assets/icons/Chat bubble Icon.svg"),
-                onPressed: () {},
+                // Verificar si hay notificaciones pendientes para mostrar el badge
+                icon: FutureBuilder<bool>(
+                  future: hasPendingNotifications(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData && snapshot.data!) {
+                      return badges.Badge(
+                        child: SvgPicture.asset(
+                          "assets/icons/Chat bubble Icon.svg",
+                          color: MenuState.message == selectedMenu
+                              ? kPrimaryColor
+                              : inActiveIconColor,
+                        ),
+                      );
+                    } else {
+                      return SvgPicture.asset(
+                        "assets/icons/Chat bubble Icon.svg",
+                        color: MenuState.message == selectedMenu
+                            ? kPrimaryColor
+                            : inActiveIconColor,
+                      );
+                    }
+                  },
+                ),
+                onPressed: () =>
+                    Navigator.pushNamed(context, ChatListScreen.routeName),
               ),
               IconButton(
                 icon: SvgPicture.asset(

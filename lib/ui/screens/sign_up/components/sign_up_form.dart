@@ -1,12 +1,18 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:loggy/loggy.dart';
 // import 'package:shop_app/screens/complete_profile/complete_profile_screen.dart';
 import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/components/custom_surfix_icon.dart';
 import 'package:tu_pension/ui/components/default_button.dart';
 import 'package:tu_pension/ui/components/form_error.dart';
+import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/screens/complete_profile/complete_profile_screen.dart';
-
+import 'package:tu_pension/ui/screens/error/error_screen.dart';
+import 'package:tu_pension/ui/screens/register_success/register_success_screen.dart';
+import 'package:tu_pension/ui/screens/sign_in/sign_in_screen.dart';
 
 class SignUpForm extends StatefulWidget {
   @override
@@ -17,9 +23,27 @@ class _SignUpFormState extends State<SignUpForm> {
   final _formKey = GlobalKey<FormState>();
   String? email;
   String? password;
-  String? conform_password;
+  String? confirmPassword;
   bool remember = false;
   final List<String?> errors = [];
+  AuthenticationController authenticationController = Get.find();
+  bool signUpSuccess = false;
+
+  _signup(email, password) async {
+    try {
+      print('Sign Up $email, $password');
+      await authenticationController.signup(email, password);
+      print('User created a new account successfully');
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => RegisterSuccessScreen()));
+    } catch (err) {
+      logError('SignUp error $err');
+      signUpSuccess = false;
+      print('There was an error creating a new account');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => SignInScreen()));
+    }
+  }
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -50,11 +74,11 @@ class _SignUpFormState extends State<SignUpForm> {
           SizedBox(height: getProportionateScreenHeight(40)),
           DefaultButton(
             text: "Continue",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
-                // if all are valid then go to success screen
-                Navigator.pushNamed(context, CompleteProfileScreen.routeName);
+                // if valid goes to Register Success, If not goes to Sign In 
+                await _signup(email, password);
               }
             },
           ),
@@ -66,14 +90,14 @@ class _SignUpFormState extends State<SignUpForm> {
   TextFormField buildConformPassFormField() {
     return TextFormField(
       obscureText: true,
-      onSaved: (newValue) => conform_password = newValue,
+      onSaved: (newValue) => confirmPassword = newValue,
       onChanged: (value) {
         if (value.isNotEmpty) {
           removeError(error: kPassNullError);
-        } else if (value.isNotEmpty && password == conform_password) {
+        } else if (value.isNotEmpty && password == confirmPassword) {
           removeError(error: kMatchPassError);
         }
-        conform_password = value;
+        confirmPassword = value;
       },
       validator: (value) {
         if (value!.isEmpty) {

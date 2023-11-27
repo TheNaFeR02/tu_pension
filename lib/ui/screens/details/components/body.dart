@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/data/model/Product.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/components/default_button.dart';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'color_dots.dart';
 import 'product_description.dart';
 import 'top_rounded_container.dart';
 import 'product_images.dart';
+import 'package:tu_pension/ui/screens/chat/chat_screen.dart';
 
 class Body extends StatelessWidget {
   final Product product;
@@ -64,7 +66,9 @@ class Body extends StatelessWidget {
                         ),
                         child: DefaultButton(
                           text: "Contactar al anunciante",
-                          press: () {},
+                          press: () {
+                            startChat(context);
+                          },
                         ),
                       ),
                     ),
@@ -76,5 +80,40 @@ class Body extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void startChat(BuildContext context) async {
+    String userUid = FirebaseAuth.instance.currentUser!.uid;
+    String sellerUid = product.sellerUid;
+    String chatId = 'chat_${userUid}_${sellerUid}';
+
+    bool chatExists = await _checkIfChatExists(chatId);
+
+    if (!chatExists) {
+      await FirebaseFirestore.instance.collection('chats').doc(chatId).set({
+        'participants': [userUid, sellerUid],
+        'productTitle': product.title,
+        'unreadMessages': {
+          userUid: 0,
+          sellerUid: 0,
+        },
+      });
+    }
+
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => ChatScreen(
+          chatId: chatId,
+          productTitle: product.title,
+        ),
+      ),
+    );
+  }
+
+  Future<bool> _checkIfChatExists(String chatId) async {
+    var chatDocument =
+        await FirebaseFirestore.instance.collection('chats').doc(chatId).get();
+    return chatDocument.exists;
   }
 }

@@ -1,4 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:loggy/loggy.dart';
 // import 'package:shop_app/components/custom_surfix_icon.dart';
 
 // import 'package:shop_app/screens/forgot_password/forgot_password_screen.dart';
@@ -8,7 +11,9 @@ import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/components/custom_surfix_icon.dart';
 import 'package:tu_pension/ui/components/default_button.dart';
 import 'package:tu_pension/ui/components/form_error.dart';
+import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/helper/keyboard.dart';
+import 'package:tu_pension/ui/screens/error/error_screen.dart';
 import 'package:tu_pension/ui/screens/login_success/login_success_screen.dart';
 
 class SignForm extends StatefulWidget {
@@ -22,6 +27,31 @@ class _SignFormState extends State<SignForm> {
   String? password;
   bool? remember = false;
   final List<String?> errors = [];
+  AuthenticationController authenticationController = Get.find();
+
+  _login(theEmail, thePassword) async {
+    logInfo('_login $theEmail $thePassword');
+    try {
+      // Here we call the login method from the AuthenticationController
+      bool succesfullLogin =
+          await authenticationController.login(theEmail, thePassword);
+      if (succesfullLogin) {
+        print('User logged in successfully');
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => LoginSuccessScreen()));
+      } else {
+        print('User login failed');
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => ErrorScreen()));
+      }
+    } catch (err) {
+      print('There was an error logging in!!!!!!');
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (context) => ErrorScreen()));
+
+      logError('Login error $err');
+    }
+  }
 
   void addError({String? error}) {
     if (!errors.contains(error))
@@ -74,12 +104,12 @@ class _SignFormState extends State<SignForm> {
           SizedBox(height: getProportionateScreenHeight(20)),
           DefaultButton(
             text: "Continuar",
-            press: () {
+            press: () async {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 // if all are valid then go to success screen
                 KeyboardUtil.hideKeyboard(context);
-                Navigator.pushNamed(context, LoginSuccessScreen.routeName);
+                await _login(email, password);
               }
             },
           ),

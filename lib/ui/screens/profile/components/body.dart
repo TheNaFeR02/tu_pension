@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:tu_pension/ui/controllers/authentication_controller.dart';
+import 'package:tu_pension/ui/pages/authentication/login.dart';
+import 'package:tu_pension/ui/screens/sign_in/sign_in_screen.dart';
 
 import 'profile_menu.dart';
 import 'profile_pic.dart';
 
 class Body extends StatelessWidget {
+  AuthenticationController authenticationController = Get.find();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -33,10 +38,15 @@ class Body extends StatelessWidget {
             press: () {},
           ),
           ProfileMenu(
-            text: "Cerrar sesión",
-            icon: "assets/icons/Log out.svg",
-            press: () {},
-          ),
+              text: "Cerrar sesión",
+              icon: "assets/icons/Log out.svg",
+              press: () {
+                authenticationController.logout();
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => SignInScreen()),
+                    (route) => false);
+              }),
         ],
       ),
     );

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class Product {
   final int id;
-  final String title, description;
+  final String title, description, sellerUid;
   final List<String> images;
   final List<Color> colors;
   final double rating, price;
@@ -18,10 +18,9 @@ class Product {
     required this.title,
     required this.price,
     required this.description,
+    required this.sellerUid,
   });
 }
-
-// Our demo Products
 
 List<Product> demoProducts = [
   Product(
@@ -45,6 +44,7 @@ List<Product> demoProducts = [
     rating: 4.8,
     isFavourite: true,
     isPopular: true,
+    sellerUid: "seller1",
   ),
   Product(
     id: 2,
@@ -64,6 +64,7 @@ List<Product> demoProducts = [
     description: description,
     rating: 4.3,
     isPopular: true,
+    sellerUid: "seller2",
   ),
   Product(
     id: 3,
@@ -87,24 +88,8 @@ List<Product> demoProducts = [
     rating: 4.1,
     isFavourite: true,
     isPopular: true,
+    sellerUid: "tJjCZbKvUIZNnfsmAmvHlrHUEcI2",
   ),
-  // Product(
-  //   id: 4,
-  //   images: [
-  //     "assets/images/wireless headset.png",
-  //   ],
-  //   colors: [
-  //     Color(0xFFF6625E),
-  //     Color(0xFF836DB8),
-  //     Color(0xFFDECB9C),
-  //     Colors.white,
-  //   ],
-  //   title: "Logitech Head",
-  //   price: 20.20,
-  //   description: description,
-  //   rating: 4.1,
-  //   isFavourite: true,
-  // ),
 ];
 
 const String description =
