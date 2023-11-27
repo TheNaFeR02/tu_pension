@@ -33,11 +33,13 @@ class _SignFormState extends State<SignForm> {
     logInfo('_login $theEmail $thePassword');
     try {
       // Here we call the login method from the AuthenticationController
-      bool succesfullLogin = await authenticationController.login(theEmail, thePassword);
+      bool succesfullLogin =
+          await authenticationController.login(theEmail, thePassword);
       print('User logged in successfully');
-      if (succesfullLogin)
-      Navigator.pushReplacement(context,
-          MaterialPageRoute(builder: (context) => LoginSuccessScreen()));
+      if (succesfullLogin) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => LoginSuccessScreen()));
+      }
     } catch (err) {
       print('There was an error logging in!!!!!!');
       Navigator.pushReplacement(
