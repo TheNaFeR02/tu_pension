@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:tu_pension/ui/screens/cart/cart_screen.dart';
+import 'package:tu_pension/ui/screens/chat/chat_list_screen.dart';
 import 'package:tu_pension/ui/screens/complete_profile/complete_profile_screen.dart';
 import 'package:tu_pension/ui/screens/details/details_screen.dart';
 import 'package:tu_pension/ui/screens/error/error_screen.dart';
@@ -12,7 +13,6 @@ import 'package:tu_pension/ui/screens/register_success/register_success_screen.d
 import 'package:tu_pension/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:tu_pension/ui/screens/sign_up/sign_up_screen.dart';
 import 'package:tu_pension/ui/screens/splash/splash_screen.dart';
-
 
 // We use name route
 // All our routes will be available here
@@ -30,4 +30,5 @@ final Map<String, WidgetBuilder> routes = {
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
   ErrorScreen.routeName: (context) => ErrorScreen(),
+  ChatListScreen.routeName: (context) => ChatListScreen(),
 };

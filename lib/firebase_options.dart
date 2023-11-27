@@ -49,6 +49,7 @@ class DefaultFirebaseOptions {
     messagingSenderId: '728265546246',
     projectId: 'tupension-e8dae',
     authDomain: 'tupension-e8dae.firebaseapp.com',
+    databaseURL: 'https://tupension-e8dae-default-rtdb.firebaseio.com',
     storageBucket: 'tupension-e8dae.appspot.com',
     measurementId: 'G-G0C300LLXP',
   );
@@ -58,6 +59,7 @@ class DefaultFirebaseOptions {
     appId: '1:728265546246:android:c9a292e47220cd3ac4c187',
     messagingSenderId: '728265546246',
     projectId: 'tupension-e8dae',
+    databaseURL: 'https://tupension-e8dae-default-rtdb.firebaseio.com',
     storageBucket: 'tupension-e8dae.appspot.com',
   );
 
@@ -66,6 +68,7 @@ class DefaultFirebaseOptions {
     appId: '1:728265546246:ios:c3e821f8104ef563c4c187',
     messagingSenderId: '728265546246',
     projectId: 'tupension-e8dae',
+    databaseURL: 'https://tupension-e8dae-default-rtdb.firebaseio.com',
     storageBucket: 'tupension-e8dae.appspot.com',
     iosBundleId: 'com.example.tuPension',
   );
@@ -75,6 +78,7 @@ class DefaultFirebaseOptions {
     appId: '1:728265546246:ios:83a2435b9a781360c4c187',
     messagingSenderId: '728265546246',
     projectId: 'tupension-e8dae',
+    databaseURL: 'https://tupension-e8dae-default-rtdb.firebaseio.com',
     storageBucket: 'tupension-e8dae.appspot.com',
     iosBundleId: 'com.example.tuPension.RunnerTests',
   );
