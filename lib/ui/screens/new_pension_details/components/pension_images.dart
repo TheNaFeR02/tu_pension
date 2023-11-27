@@ -6,8 +6,8 @@ import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/data/model/Pension.dart';
 import 'package:tu_pension/size_config.dart';
 
-class PensionImages extends StatefulWidget {
-  const PensionImages(
+class CreatePensionImages extends StatefulWidget {
+  const CreatePensionImages(
       {Key? key, required this.pension, required this.updatePreviewImages})
       : super(key: key);
 
@@ -15,10 +15,10 @@ class PensionImages extends StatefulWidget {
   final Function(List<String>) updatePreviewImages;
 
   @override
-  _PensionImagesState createState() => _PensionImagesState();
+  _CreatePensionImagesState createState() => _CreatePensionImagesState();
 }
 
-class _PensionImagesState extends State<PensionImages> {
+class _CreatePensionImagesState extends State<CreatePensionImages> {
   int selectedImage = 0;
   List<String> myFile = [];
   ImagePicker? picker = ImagePicker();
@@ -49,7 +49,7 @@ class _PensionImagesState extends State<PensionImages> {
             child: AspectRatio(
               aspectRatio: 1,
               child: Hero(
-                tag: widget.pension.id.toString(),
+                tag: widget.pension.key.toString(),
                 child: !previewImages[selectedImage].contains('add-image.png')
                     ? (Image.file(File(previewImages[selectedImage])))
                     : (Image.asset(previewImages[selectedImage])),

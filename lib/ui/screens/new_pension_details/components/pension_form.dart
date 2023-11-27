@@ -135,11 +135,10 @@ class _PensionFormState extends State<PensionForm> {
                       Future.delayed(Duration(milliseconds: 300), () {
                         Navigator.pushReplacement(context, MaterialPageRoute(
                           builder: (context) {
-                            return HomeScreen();
+                            return UserPensionListScreen();
                           },
                         ));
                       });
-
                       // redirect to succesfull pension created.
                     } catch (error) {
                       print('Error: $error');

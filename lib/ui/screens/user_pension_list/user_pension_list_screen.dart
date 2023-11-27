@@ -17,80 +17,80 @@ class UserPensionListScreen extends StatefulWidget {
 
 class _UserPensionListScreenState extends State<UserPensionListScreen> {
   UserPensionListController pensionListController = Get.find();
-  RxList<Pension> pensions = <Pension>[].obs;
 
   @override
   void initState() {
     super.initState();
-
-    // Start listening to changes.
-    pensionListController.startPensions();
-
-    // Directly assign pensions to pensionListController.userPensions
-    pensions = pensionListController.userPensions;
-
-    // No need for addPostFrameCallback here
-
-    // your obx var, eg. global_variables.appBarTitle.value = "Messages";
-
-    // your obx var, eg. global_variables.appBarTitle.value = "Messages";
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      pensionListController.startPensions();
+    });
   }
 
   @override
   void dispose() {
-    // Stop listening to changes.
     pensionListController.stopPensions();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    // setState(() {
-    //   pensions = pensionListController.userPensions;
-    // });
-    // print(pensions);
-    pensions = pensionListController.userPensions;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tus Pensiones'),
-        centerTitle: true,
-      ),
-      body: Obx(() {
-        // Obx will automatically rebuild when pensions changes
-        return ListView.builder(
-          physics: BouncingScrollPhysics(),
-          shrinkWrap: true,
-          itemCount: pensions.length,
-          itemBuilder: (context, index) {
-            var pension = pensions[index];
+    return GetBuilder<UserPensionListController>(
+      init: UserPensionListController(),
+      builder: (controller) {
+        // controller.startPensions();
 
-            // Replace 'YourProductCardWidget' with the actual widget
-            return Container(
-              child: PensionCard(
-                pension: pension as Pension,
-                // Add other properties as needed
+        return Scaffold(
+          appBar: AppBar(title: Text('Create Pension')),
+          body: Obx(() => ListView.builder(
+                  physics: BouncingScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: controller.userPensions.length,
+                  itemBuilder: (context, index) {
+                    var pension = controller.userPensions[index];
+
+                    // Replace 'YourProductCardWidget' with the actual widget
+                    return Container(
+                      child: PensionCard(
+                        pension: pension as Pension,
+                        // Add other properties as needed
+                      ),
+                      padding: EdgeInsets.all(16),
+                    );
+                  })
+
+              // () => SingleChildScrollView(
+              //   scrollDirection: Axis.vertical,
+              //   physics: BouncingScrollPhysics(),
+              //   child: Column(
+              //     children: [
+              //       for (var pension in controller.userPensions)
+              //         PensionCard(
+              //           pension: pension,
+              //         ),
+              //       SizedBox(width: getProportionateScreenWidth(20)),
+              //     ],
+              //   ),
+              // ),
               ),
-              padding: EdgeInsets.all(16),
-            );
-          },
+          bottomNavigationBar: Padding(
+            padding: EdgeInsets.symmetric(
+              vertical: getProportionateScreenWidth(15),
+              horizontal: getProportionateScreenWidth(20),
+            ),
+            child: DefaultButton(
+              text: "Crear Pensión",
+              press: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => CreatePensionDetailScreen(),
+                  ),
+                );
+              },
+            ),
+          ),
         );
-      }),
-      bottomNavigationBar: Padding(
-        padding: EdgeInsets.symmetric(
-            vertical: getProportionateScreenWidth(15),
-            horizontal: getProportionateScreenWidth(20)),
-        child: DefaultButton(
-          text: "Crear Pensión",
-          press: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => CreatePensionDetailScreen(),
-              )
-            );
-          },
-        ),
-      ),
+      },
     );
   }
 }

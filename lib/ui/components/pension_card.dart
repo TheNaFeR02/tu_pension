@@ -6,6 +6,7 @@ import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/data/model/Pension.dart';
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/screens/details/details_screen.dart';
+import 'package:tu_pension/ui/screens/pension_details/details_screen.dart';
 
 class PensionCard extends StatelessWidget {
   const PensionCard({
@@ -25,12 +26,12 @@ class PensionCard extends StatelessWidget {
       child: SizedBox(
         width: getProportionateScreenWidth(width),
         child: GestureDetector(
-          onTap: () => {},
-          // onTap: () => Navigator.pushNamed(
-          //   context,
-          //   PensionDetailsScreen.routeName,
-          //   arguments: ProductDetailsArguments(product: product),
-          // ),
+          // onTap: () => {},
+          onTap: () => Navigator.pushNamed(
+            context,
+            PensionDetailsScreen.routeName,
+            arguments: PensionDetailsArguments(pension: pension),
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -43,7 +44,7 @@ class PensionCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Hero(
-                    tag: pension.id.toString(),
+                    tag: pension.key.toString(),
                     child: !pension.images[0].contains('add-image.png')
                         ? (Image.file(File(pension.images[0])))
                         : (Image.asset(pension.images[0])),

@@ -17,7 +17,7 @@ class UserPensionListController extends GetxController {
   // late StreamSubscription<DatabaseEvent> updatePensionStreamSubscription;
   late StreamSubscription<DatabaseEvent> readPensionStreamSubscription;
 
-  void startPensions() async {
+  void startPensions() {
     // Clear the list when starting to avoid duplicates
     _userPensions.clear();
 
@@ -46,13 +46,15 @@ class UserPensionListController extends GetxController {
   // }
 
   _onPensionRead(DatabaseEvent event) {
-    final data = event.snapshot.value as Map<dynamic, dynamic>;
+    if (event.snapshot.value == null) {
+      return;
+    }
 
+    final data = event.snapshot.value as Map<dynamic, dynamic>;
     if (data != null) {
       // Iterate through the map entries
       data.forEach((key, value) {
         final json = value as Map<dynamic, dynamic>;
-
         // Create a UserPension object from each entry
         Pension userPension = Pension.fromJson(
           event.snapshot,
@@ -61,11 +63,18 @@ class UserPensionListController extends GetxController {
 
         // Add the UserPension to the _userPensions list
         _userPensions.add(userPension);
+        print(_userPensions);
       });
 
       // Optionally, you can print the updated _userPensions list
       // print(_userPensions);
     }
+  }
+
+  void stopPensions() {
+    // newPensionStreamSubscription.cancel();
+    // updatePensionStreamSubscription.cancel();
+    readPensionStreamSubscription.cancel();
   }
 
   // _onPensionAdded(DatabaseEvent event) {
@@ -83,19 +92,13 @@ class UserPensionListController extends GetxController {
   //       UserPension.fromJson(event.snapshot, json);
   // }
 
-  void stopPensions() {
-    // newPensionStreamSubscription.cancel();
-    // updatePensionStreamSubscription.cancel();
-    readPensionStreamSubscription.cancel();
-  }
-
   Future<void> createPension(
       Uid, email, title, description, price, images) async {
     logInfo(
         "Creating a pension in realTime with data: $title, $description, $price, $images");
     try {
       await databaseRef.child('userPensions').push().set({
-        "uid": Uid,
+        "sellerUid": Uid,
         "email": email,
         "title": title,
         "description": description,

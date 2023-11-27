@@ -20,7 +20,7 @@ class Body extends StatefulWidget {
 
 class _BodyState extends State<Body> {
   final Pension pension = Pension(
-    id: 1,
+    sellerUid: '0',
     images: [
       "assets/images/add-image.png",
       "assets/images/add-image.png",
@@ -42,10 +42,9 @@ class _BodyState extends State<Body> {
 
   @override
   Widget build(BuildContext context) {
-
     return ListView(
       children: [
-        PensionImages(
+        CreatePensionImages(
           pension: pension,
           updatePreviewImages: (List<String> updatedImages) {
             setState(() {

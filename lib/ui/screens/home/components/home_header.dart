@@ -23,11 +23,9 @@ class HomeHeader extends StatelessWidget {
           SearchField(),
           IconBtnWithCounter(
             svgSrc: "assets/icons/add.svg",
-            press: () => Navigator.pushReplacement(
+            press: () => Navigator.pushNamed(
               context,
-              MaterialPageRoute(
-                builder: (context) => UserPensionListScreen(),
-              ),
+              UserPensionListScreen.routeName,
             ),
           ),
           IconBtnWithCounter(

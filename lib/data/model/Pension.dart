@@ -3,15 +3,12 @@ import 'package:flutter/material.dart';
 
 class Pension {
   String? key;
-  int id;
-  String title, description, rating;
+  String title, description, rating, sellerUid;
   List<String> images;
   int price;
   bool? isFavourite, isPopular;
 
-
   Pension({
-    required this.id,
     required this.images,
     // required this.colors,
     this.rating = '0.0',
@@ -20,18 +17,17 @@ class Pension {
     required this.title,
     required this.price,
     required this.description,
+    required this.sellerUid,
   });
 
   Pension.fromJson(DataSnapshot snapshot, Map<dynamic, dynamic> json)
       : key = snapshot.key ?? "0",
-        id = json['id'] ?? 0,
         title = json['title'] ?? "title",
         description = json['description'] ?? "description",
         price = json['price'] ?? 0,
         images = List<String>.from(json['images'] ?? []),
-        rating = json['rating'] ?? '0.0'
-        ;
-
+        rating = json['rating'] ?? '0.0',
+        sellerUid = json['sellerUid'] ?? "";
 
   toJson() {
     return {
@@ -41,13 +37,18 @@ class Pension {
       "images": images,
     };
   }
+
+  // @override
+  String toString() {
+    return 'Pension{id: $key, title: $title}';
+  }
 }
 
 // Our demo Products
 
 List<Pension> demoProducts = [
   Pension(
-    id: 1,
+    sellerUid: "0",
     images: [
       "assets/images/houseA_1.jpg",
       "assets/images/houseA_2.jpg",
@@ -69,7 +70,7 @@ List<Pension> demoProducts = [
     isPopular: true,
   ),
   Pension(
-    id: 2,
+    sellerUid: "1",
     images: [
       "assets/images/houseB_1.jpg",
       "assets/images/houseB_2.jpg",
@@ -88,7 +89,7 @@ List<Pension> demoProducts = [
     isPopular: true,
   ),
   Pension(
-    id: 3,
+    sellerUid: "2",
     images: [
       "assets/images/houseC_1.jpg",
       "assets/images/houseC_2.jpg",

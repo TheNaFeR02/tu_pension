@@ -53,7 +53,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<String> _isUserLoggedIn() async {
     User? user = await FirebaseAuth.instance.authStateChanges().first;
-    print(user);
+    // print(user);
     if (user == null) {
       print('User is currently signed out!');
       return SplashScreen.routeName;

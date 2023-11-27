@@ -3,12 +3,14 @@ import 'package:tu_pension/ui/screens/cart/cart_screen.dart';
 import 'package:tu_pension/ui/screens/chat/chat_list_screen.dart';
 import 'package:tu_pension/ui/screens/complete_profile/complete_profile_screen.dart';
 import 'package:tu_pension/ui/screens/details/details_screen.dart';
+import 'package:tu_pension/ui/screens/home/components/random_pension.dart';
 import 'package:tu_pension/ui/screens/new_pension_details/details_screen.dart';
 import 'package:tu_pension/ui/screens/error/error_screen.dart';
 import 'package:tu_pension/ui/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tu_pension/ui/screens/home/home_screen.dart';
 import 'package:tu_pension/ui/screens/login_success/login_success_screen.dart';
 import 'package:tu_pension/ui/screens/otp/otp_screen.dart';
+import 'package:tu_pension/ui/screens/pension_details/details_screen.dart';
 import 'package:tu_pension/ui/screens/profile/profile_screen.dart';
 import 'package:tu_pension/ui/screens/register_success/register_success_screen.dart';
 import 'package:tu_pension/ui/screens/sign_in/sign_in_screen.dart';
@@ -35,4 +37,6 @@ final Map<String, WidgetBuilder> routes = {
   ProfileScreen.routeName: (context) => ProfileScreen(),
   ErrorScreen.routeName: (context) => ErrorScreen(),
   ChatListScreen.routeName: (context) => ChatListScreen(),
+  RandomPensions.routeName: (context) => RandomPensions(),
+  PensionDetailsScreen.routeName: (context) => PensionDetailsScreen(),
 };

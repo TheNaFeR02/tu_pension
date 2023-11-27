@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tu_pension/size_config.dart';
+import 'package:tu_pension/ui/screens/home/components/random_pension.dart';
 
 import 'categories.dart';
 import 'discount_banner.dart';
@@ -21,7 +22,8 @@ class Body extends StatelessWidget {
             Categories(),
             SpecialOffers(),
             SizedBox(height: getProportionateScreenWidth(30)),
-            PopularProducts(),
+            // PopularProducts(),
+            RandomPensions(),
             SizedBox(height: getProportionateScreenWidth(30)),
           ],
         ),

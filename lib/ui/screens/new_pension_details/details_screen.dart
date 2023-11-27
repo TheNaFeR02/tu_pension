@@ -20,8 +20,8 @@ class CreatePensionDetailScreen extends StatelessWidget {
   }
 }
 
-class PensionDetailsArguments {
+class CreatePensionDetailsArguments {
   final Pension pension;
 
-  PensionDetailsArguments({required this.pension});
+  CreatePensionDetailsArguments({required this.pension});
 }
