@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 import 'package:tu_pension/data/model/app_user.dart';
 import 'package:tu_pension/ui/controllers/authentication_controller.dart';
+
 // import '../../data/model/app_user.dart';
 
 class UserController extends GetxController {

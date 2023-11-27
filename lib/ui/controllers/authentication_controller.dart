@@ -11,7 +11,7 @@ class AuthenticationController extends GetxController {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      return Future.value(true);
+      return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return Future.error("User not found");
@@ -20,6 +20,7 @@ class AuthenticationController extends GetxController {
       }
       return Future.value(false);
     }
+    return Future.value(false);
   }
 
   Future<void> signup(email, password) async {
@@ -29,7 +30,7 @@ class AuthenticationController extends GetxController {
 
       UserController userController = Get.find();
       await userController.createUser(email, uc.user!.uid);
-
+      
       return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
