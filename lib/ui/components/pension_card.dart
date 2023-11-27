@@ -44,9 +44,29 @@ class PensionCard extends StatelessWidget {
                   ),
                   child: Hero(
                     tag: pension.id.toString(),
-                    child: !pension.images[0].contains('add-image.png')
-                        ? (Image.file(File(pension.images[0])))
-                        : (Image.asset(pension.images[0])),
+                    child: Image.network(
+                      fit: BoxFit.cover,
+                      pension.images[0],
+                      loadingBuilder: (BuildContext context, Widget child,
+                          ImageChunkEvent? loadingProgress) {
+                        if (loadingProgress == null) {
+                          return child;
+                        } else {
+                          return Center(
+                            child: CircularProgressIndicator(
+                              value: loadingProgress.expectedTotalBytes != null
+                                  ? loadingProgress.cumulativeBytesLoaded /
+                                      (loadingProgress.expectedTotalBytes ?? 1)
+                                  : null,
+                            ),
+                          );
+                        }
+                      },
+                      errorBuilder: (BuildContext context, Object error,
+                          StackTrace? stackTrace) {
+                        return Text('Error al cargar la imagen');
+                      },
+                    ),
                   ),
                 ),
               ),

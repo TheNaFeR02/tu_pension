@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:io';
 
 import 'package:firebase_database/firebase_database.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get/get.dart';
 import 'package:loggy/loggy.dart';
 import 'package:tu_pension/data/model/Pension.dart';
@@ -89,22 +91,40 @@ class UserPensionListController extends GetxController {
     readPensionStreamSubscription.cancel();
   }
 
-  Future<void> createPension(
-      Uid, email, title, description, price, images) async {
-    logInfo(
-        "Creating a pension in realTime with data: $title, $description, $price, $images");
+  Future uploadImagesToFirebase(List<String> filePath) async {
     try {
-      await databaseRef.child('userPensions').push().set({
-        "uid": Uid,
-        "email": email,
-        "title": title,
-        "description": description,
-        "price": price,
-        "images": images,
+      List<String> uploadedImages = [];
+      for (var i = 0; i < filePath.length; i++) {
+        File file = File(filePath[i]);
+        String fileName = file.path.split('/').last;
+        Reference firebaseStorageRef =
+            FirebaseStorage.instance.ref().child('uploads/$fileName');
+        UploadTask uploadTask = firebaseStorageRef.putFile(file);
+        TaskSnapshot taskSnapshot = await uploadTask;
+        String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+        uploadedImages.add(downloadUrl);
+      }
+      return uploadedImages;
+    } catch (error) {
+      print('Error: $error');
+    }
+  }
+
+  Future<void> createPension(
+      Uid, email, title, description, price, List<String> images) async {
+    try {
+      List<String> uploadedImages = await uploadImagesToFirebase(images);
+      print('uploadedImages: $uploadedImages');
+      await databaseRef.child("userPensions").push().set({
+        'uid': Uid,
+        'email': email,
+        'title': title,
+        'description': description,
+        'price': price,
+        'images': uploadedImages,
       });
     } catch (error) {
-      logError(error);
-      return Future.error(error);
+      print('Error: $error');
     }
   }
 }
