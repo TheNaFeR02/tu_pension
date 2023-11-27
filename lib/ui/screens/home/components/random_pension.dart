@@ -1,6 +1,8 @@
+
 import 'package:flutter/material.dart';
 import 'package:tu_pension/data/model/Product.dart';
 import 'package:tu_pension/size_config.dart';
+import 'package:tu_pension/ui/components/pension_card.dart';
 import 'package:tu_pension/ui/components/product_card.dart';
 
 import 'section_title.dart';
@@ -24,7 +26,7 @@ class PopularProducts extends StatelessWidget {
                 demoProducts.length,
                 (index) {
                   if (demoProducts[index].isPopular)
-                    return ProductCard(product: demoProducts[index]);
+                    return PensionCard(pension: demoProducts[index]);
                   return SizedBox
                       .shrink(); // here by default width and height is 0
                 },

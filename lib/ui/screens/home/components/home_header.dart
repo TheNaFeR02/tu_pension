@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:tu_pension/size_config.dart';
 import 'package:tu_pension/ui/screens/favorite/favorite_screen.dart';
+import 'package:tu_pension/ui/screens/new_pension_details/details_screen.dart';
+import 'package:tu_pension/ui/screens/user_pension_list/user_pension_list_screen.dart';
 import 'icon_btn_with_counter.dart';
 import 'search_field.dart';
 
@@ -19,11 +21,15 @@ class HomeHeader extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SearchField(),
-          // IconBtnWithCounter(
-          //   svgSrc: "assets/icons/Favorite Icon.svg",
-
-          //   press: () => Navigator.pushNamed(context, FavoriteScreen.routeName),
-          // ),
+          IconBtnWithCounter(
+            svgSrc: "assets/icons/add.svg",
+            press: () => Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => UserPensionListScreen(),
+              ),
+            ),
+          ),
           IconBtnWithCounter(
             svgSrc: "assets/icons/Bell.svg",
             numOfitem: 3,
