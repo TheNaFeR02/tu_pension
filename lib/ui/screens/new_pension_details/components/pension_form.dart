@@ -12,7 +12,9 @@ import 'package:tu_pension/ui/components/form_error.dart';
 import 'package:tu_pension/ui/controllers/authentication_controller.dart';
 import 'package:tu_pension/ui/controllers/user_controller.dart';
 import 'package:tu_pension/ui/controllers/user_pension_list_controller.dart';
+import 'package:tu_pension/ui/screens/home/home_screen.dart';
 import 'package:tu_pension/ui/screens/new_pension_details/components/top_rounded_container.dart';
+import 'package:tu_pension/ui/screens/user_pension_list/user_pension_list_screen.dart';
 
 class PensionForm extends StatefulWidget {
   const PensionForm({
@@ -35,9 +37,8 @@ class _PensionFormState extends State<PensionForm> {
   final _formKey = GlobalKey<FormState>();
   String? title;
   String? description;
-  String? price;
+  int? price;
   final List<String?> errors = [];
-  
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +58,7 @@ class _PensionFormState extends State<PensionForm> {
               padding: EdgeInsets.all(getProportionateScreenWidth(15)),
               width: getProportionateScreenWidth(64),
               decoration: BoxDecoration(
-                color: widget.pension.isFavourite
+                color: widget.pension.isFavourite ?? false
                     ? Color(0xFFFFE6E6)
                     : Color(0xFFF5F6F9),
                 borderRadius: BorderRadius.only(
@@ -67,7 +68,7 @@ class _PensionFormState extends State<PensionForm> {
               ),
               child: SvgPicture.asset(
                 "assets/icons/Heart Icon_2.svg",
-                color: widget.pension.isFavourite
+                color: widget.pension.isFavourite ?? false
                     ? Color(0xFFFF4848)
                     : Color(0xFFDBDEE4),
                 height: getProportionateScreenWidth(16),
@@ -131,6 +132,14 @@ class _PensionFormState extends State<PensionForm> {
                         price,
                         images,
                       );
+                      Future.delayed(Duration(milliseconds: 300), () {
+                        Navigator.pushReplacement(context, MaterialPageRoute(
+                          builder: (context) {
+                            return HomeScreen();
+                          },
+                        ));
+                      });
+
                       // redirect to succesfull pension created.
                     } catch (error) {
                       print('Error: $error');
@@ -191,7 +200,7 @@ class _PensionFormState extends State<PensionForm> {
   TextFormField buildPriceFormField() {
     return TextFormField(
       keyboardType: TextInputType.number,
-      onSaved: (newValue) => price = newValue,
+      onSaved: (newValue) => price = int.parse(newValue ?? '0'),
       onChanged: (value) {},
       validator: (value) {},
       decoration: InputDecoration(

@@ -13,8 +13,8 @@ class UserPension {
       : key = snapshot.key ?? "0",
         title = json['title'] ?? "title",
         description = json['description'] ?? "description",
-        price = json['price'] ?? "price",
-        images = json['images'] ?? "images";
+        price = json['price'] ?? 0,
+        images = List<String>.from(json['images'] ?? []);
 
   toJson() {
     return {

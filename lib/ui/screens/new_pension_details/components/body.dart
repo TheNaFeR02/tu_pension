@@ -28,12 +28,12 @@ class _BodyState extends State<Body> {
       "assets/images/add-image.png",
       "assets/images/add-image.png",
     ],
-    colors: [],
+    // colors: [],
     title: "Agrega un título",
-    price: 0.0,
+    price: 0,
     description:
         "Esta es una descripción de ejemplo, la cual deberá ser reemplazada por una descripción real del producto …",
-    rating: 0.0,
+    rating: '0.0',
     isFavourite: true,
     isPopular: true,
   );
