@@ -10,6 +10,7 @@ import 'package:tu_pension/ui/controllers/user_controller.dart';
 
 import 'package:tu_pension/routes.dart';
 import 'package:tu_pension/theme.dart';
+import 'package:tu_pension/ui/controllers/user_pension_list_controller.dart';
 import 'package:tu_pension/ui/screens/home/home_screen.dart';
 import 'package:tu_pension/ui/screens/sign_in/sign_in_screen.dart';
 import 'package:tu_pension/ui/screens/splash/splash_screen.dart';
@@ -80,6 +81,8 @@ class _MyHomePageState extends State<MyHomePage> {
           // Once complete, show your application
           if (snapshot.connectionState == ConnectionState.done) {
             Get.put(AuthenticationController());
+            Get.put(UserPensionListController());
+            
             return MaterialApp(
               debugShowCheckedModeBanner: false,
               title: 'The Flutter Way - Template',

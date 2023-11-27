@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 import 'package:tu_pension/ui/screens/cart/cart_screen.dart';
 import 'package:tu_pension/ui/screens/complete_profile/complete_profile_screen.dart';
 import 'package:tu_pension/ui/screens/details/details_screen.dart';
+import 'package:tu_pension/ui/screens/new_pension_details/details_screen.dart';
 import 'package:tu_pension/ui/screens/error/error_screen.dart';
 import 'package:tu_pension/ui/screens/forgot_password/forgot_password_screen.dart';
 import 'package:tu_pension/ui/screens/home/home_screen.dart';
@@ -27,6 +28,7 @@ final Map<String, WidgetBuilder> routes = {
   OtpScreen.routeName: (context) => OtpScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   DetailsScreen.routeName: (context) => DetailsScreen(),
+  CreatePensionDetailScreen.routeName: (context) => CreatePensionDetailScreen(),
   CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
   ErrorScreen.routeName: (context) => ErrorScreen(),

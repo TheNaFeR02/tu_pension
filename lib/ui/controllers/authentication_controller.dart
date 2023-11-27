@@ -1,4 +1,3 @@
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:get/get.dart';
@@ -7,18 +6,19 @@ import 'package:tu_pension/ui/controllers/user_controller.dart';
 class AuthenticationController extends GetxController {
   final databaseRef = FirebaseDatabase.instance.ref();
 
-  Future<void> login(email, password) async {
+  Future<bool> login(email, password) async {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(email: email, password: password);
 
-      return Future.value();
+      return Future.value(true);
     } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         return Future.error("User not found");
       } else if (e.code == 'wrong-password') {
         return Future.error("Wrong password");
       }
+      return Future.value(false);
     }
   }
 
@@ -29,7 +29,7 @@ class AuthenticationController extends GetxController {
 
       UserController userController = Get.find();
       await userController.createUser(email, uc.user!.uid);
-      
+
       return Future.value();
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
