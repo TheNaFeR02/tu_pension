@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:tu_pension/ui/screens/cart/cart_screen.dart';
+import 'package:tu_pension/ui/screens/favorite/favorite_screen.dart';
 import 'package:tu_pension/ui/screens/chat/chat_list_screen.dart';
 import 'package:tu_pension/ui/screens/complete_profile/complete_profile_screen.dart';
 import 'package:tu_pension/ui/screens/details/details_screen.dart';
@@ -31,9 +31,9 @@ final Map<String, WidgetBuilder> routes = {
   OtpScreen.routeName: (context) => OtpScreen(),
   HomeScreen.routeName: (context) => HomeScreen(),
   DetailsScreen.routeName: (context) => DetailsScreen(),
+  FavoriteScreen.routeName: (context) => FavoriteScreen(),
   CreatePensionDetailScreen.routeName: (context) => CreatePensionDetailScreen(),
   UserPensionListScreen.routeName: (context) => UserPensionListScreen(),
-  CartScreen.routeName: (context) => CartScreen(),
   ProfileScreen.routeName: (context) => ProfileScreen(),
   ErrorScreen.routeName: (context) => ErrorScreen(),
   ChatListScreen.routeName: (context) => ChatListScreen(),

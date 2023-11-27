@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:tu_pension/size_config.dart';
-import 'package:tu_pension/ui/screens/cart/cart_screen.dart';
+import 'package:tu_pension/ui/screens/favorite/favorite_screen.dart';
 import 'package:tu_pension/ui/screens/new_pension_details/details_screen.dart';
 import 'package:tu_pension/ui/screens/user_pension_list/user_pension_list_screen.dart';
 import 'icon_btn_with_counter.dart';

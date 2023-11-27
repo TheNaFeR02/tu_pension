@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tu_pension/constants.dart';
 import 'package:tu_pension/enums.dart';
-import 'package:tu_pension/ui/screens/chat/chat_list_screen.dart';
+import 'package:tu_pension/ui/screens/favorite/favorite_screen.dart';
 import 'package:tu_pension/ui/screens/home/home_screen.dart';
 import 'package:tu_pension/ui/screens/profile/profile_screen.dart';
+import 'package:tu_pension/ui/screens/chat/chat_list_screen.dart';
 import 'package:tu_pension/hooks/hasPendingNotifications.dart';
 import 'package:badges/badges.dart' as badges;
 
@@ -18,19 +19,19 @@ class CustomBottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color inActiveIconColor = Color(0xFFB6B6B6);
+    const Color inActiveIconColor = Color(0xFFB6B6B6);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 14),
+      padding: const EdgeInsets.symmetric(vertical: 14),
       decoration: BoxDecoration(
         color: Colors.white,
         boxShadow: [
           BoxShadow(
-            offset: Offset(0, -15),
+            offset: const Offset(0, -15),
             blurRadius: 20,
-            color: Color(0xFFDADADA).withOpacity(0.15),
+            color: const Color(0xFFDADADA).withOpacity(0.15),
           ),
         ],
-        borderRadius: BorderRadius.only(
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(40),
           topRight: Radius.circular(40),
         ),
@@ -52,7 +53,8 @@ class CustomBottomNavBar extends StatelessWidget {
               ),
               IconButton(
                 icon: SvgPicture.asset("assets/icons/Heart Icon.svg"),
-                onPressed: () {},
+                onPressed: () =>
+                    Navigator.pushNamed(context, FavoriteScreen.routeName),
               ),
               IconButton(
                 // Verificar si hay notificaciones pendientes para mostrar el badge
@@ -61,6 +63,10 @@ class CustomBottomNavBar extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.hasData && snapshot.data!) {
                       return badges.Badge(
+                        badgeContent: const Text(
+                          '1',
+                          style: TextStyle(color: Colors.white),
+                        ),
                         child: SvgPicture.asset(
                           "assets/icons/Chat bubble Icon.svg",
                           color: MenuState.message == selectedMenu
